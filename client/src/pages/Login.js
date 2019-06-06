@@ -13,11 +13,16 @@ export class Login extends Component{
         },
     }
 
+    handleInputOnChange = (e) => { 
+        this.setState({ [ e.target.name ] : e.target.value })
+    }
+
     handleSubmit = (e) =>{
         e.preventDefault();
+        const { email, password } = this.state;
         fetch('http://localhost:3789/api/login',{ 
             method : 'POST',
-            body : JSON.stringify(this.state)
+            body : JSON.stringify({ email , password })
         }).then(res => res.json())
             .catch(error => console.log('error', error))
             .then(response => {
@@ -49,13 +54,13 @@ export class Login extends Component{
                         <Form.Row>
                             <Form.Group as={Col} controlId="formGridEmail">
                                 <Form.Label>Email</Form.Label>
-                                <Form.Control type="email" placeholder="Enter email" onChange = { (e) => { this.setState({ email : e.target.value }) }} />
+                                <Form.Control name="email" type="email" placeholder="Enter email" onChange={ this.handleInputOnChange } />
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
                             <Form.Group as={Col} controlId="formGridPassword">
                                 <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" placeholder="Password" onChange = { (e) => { this.setState({ password : e.target.value }) }} />
+                                <Form.Control name="password" type="password" placeholder="Password" onChange={ this.handleInputOnChange } />
                             </Form.Group>
                         </Form.Row>
                         
