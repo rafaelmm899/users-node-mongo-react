@@ -1,6 +1,8 @@
 import  React,{ Component } from "react";
 import { Row, Col, Form,Button } from 'react-bootstrap';
-import { Message } from '../components/message'
+import { Message } from '../components/Message'
+import { Redirect } from "react-router-dom";
+import { isAuthenticated } from '../components/Authentication';
 
 export class Login extends Component{
 
@@ -11,7 +13,10 @@ export class Login extends Component{
             type : null,
             message : null
         },
+        isAuthenticated : false
     }
+
+   
 
     handleInputOnChange = (e) => { 
         this.setState({ [ e.target.name ] : e.target.value })
@@ -22,12 +27,19 @@ export class Login extends Component{
         const { email, password } = this.state;
         fetch('http://localhost:3789/api/login',{ 
             method : 'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },
             body : JSON.stringify({ email , password })
         }).then(res => res.json())
             .catch(error => console.log('error', error))
             .then(response => {
                 if(response.user){
-                    
+                    localStorage.setItem('user', JSON.stringify(response.user));
+                    localStorage.setItem('token',response.token);
+                    this.setState({
+                        isAuthenticated : true
+                    })
                 }else{
                     this.setState({
                         alert : {
@@ -41,6 +53,10 @@ export class Login extends Component{
 
 
     render(){
+        if (isAuthenticated()) {
+            return <Redirect to="/dashboard" />;
+        }
+
         return(
             <Row className="justify-content-md-center" style={{ marginTop:"10%"}}>
                 <Col md="6" className="shadow-sm p-3 mb-5 bg-light rounded">
