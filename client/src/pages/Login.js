@@ -1,7 +1,7 @@
 import  React,{ Component } from "react";
 import { Row, Col, Form,Button } from 'react-bootstrap';
 import { Message } from '../components/Message'
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { isAuthenticated } from '../components/Authentication';
 
 export class Login extends Component{
@@ -83,7 +83,7 @@ export class Login extends Component{
                         <Form.Group as={Row}>
                             <Col md={{ span: 12 }}>
                                 <Button type="submit" variant="primary">Sign in</Button>
-                                <Button type="button" variant="secondary" style={{marginLeft: ".5em"}}>Register</Button>
+                                <Link to="/register" variant="secondary" style={{marginLeft: ".5em"}}>Register</Link>
                             </Col>
                         </Form.Group>
                         

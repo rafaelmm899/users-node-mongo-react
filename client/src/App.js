@@ -3,6 +3,7 @@ import './App.css';
 import { Route, Switch } from "react-router-dom";
 import { Login } from './pages/Login';
 import { Dashboard } from './pages/Dashboard';
+import { Register } from './pages/Register';
 import { PrivateRoute } from './components/PrivateRoute';
 import { Container } from 'react-bootstrap';
 import { isAuthenticated } from './components/Authentication';
@@ -28,6 +29,7 @@ export default class App extends Component {
             <Container>
                 <Switch>
                     <Route exact path="/" component={Login} />
+                    <Route exact path="/register" component={Register} />
                     <PrivateRoute path="/dashboard" component={Dashboard} />
                 </Switch>
             </Container>
