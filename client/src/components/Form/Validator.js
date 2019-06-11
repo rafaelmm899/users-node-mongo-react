@@ -9,6 +9,8 @@ const validate = (value, rules) => {
             case 'isRequired': isValid = isValid && requiredValidator(value); break;
               
             case 'isEmail': isValid = isValid && emailValidator(value); break;
+
+            case 'isDate' : isValid = isValid && dateValidator(value); break;
           
             default: isValid = true;
         }
@@ -24,6 +26,15 @@ const minLengthValidator = (value, minLength) => {
   
 const requiredValidator = value => {
     return value.trim() !== '';	
+}
+
+const dateValidator = value => {
+    var regEx = /^\d{4}-\d{2}-\d{2}$/;
+    if(!value.match(regEx)) return false;
+    var d = new Date(value);
+    var dNum = d.getTime();
+    if(!dNum && dNum !== 0) return false;
+    return d.toISOString().slice(0,10) === value;
 }
 
 const emailValidator = value => {

@@ -54,6 +54,7 @@ export class Register extends Component {
             value : '',
             rules : {
                 isRequired : true,
+                isDate : true
             },
             isTouched : false
         },
