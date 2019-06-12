@@ -1,30 +1,43 @@
-import React from 'react'
-import { Form } from 'react-bootstrap';
+import React, { Component } from 'react'
+import { Form,Col } from 'react-bootstrap';
 
-const InputText = props => {
+export class InputText extends Component {
 
-
-    if(props.isTouched){
-        return (props.isValid) ?  
-                    <Form.Control   isValid={true}
-                                    name={props.name}
-                                    onChange={props.onChange}
-                                    type={props.type}
-                                    placeholder={props.placeholder} /> : 
-                    <Form.Control   isInvalid={true} 
-                                    name={props.name}
-                                    onChange={props.onChange}
-                                    type={props.type}
-                                    placeholder={props.placeholder} />;        
-    }else{
-        return <Form.Control 
-                    name={props.name}
-                    onChange={props.onChange}
-                    type={props.type}
-                    placeholder={props.placeholder}/>;
+    state ={
+        isInValid : false
     }
 
-    
-}
+    componentWillReceiveProps(nextProp){
+        if(nextProp.isTouched){
+            if(!nextProp.isValid){
+                this.setState({
+                    isInValid : true
+                })
+            }else{
+                this.setState({
+                    isInValid : false
+                })
+            }
+        }
+    }
 
-export default InputText;
+    render(){
+        const { name, onChange, type, placeholder,label,controlId } = this.props
+
+        return  (
+                <Form.Group as={Col} controlId={controlId}>
+                    <Form.Label>{label}</Form.Label>
+                    <Form.Control 
+                        isInvalid={this.state.isInValid}
+                        name={name}
+                        onChange={onChange}
+                        type={type}
+                        placeholder={placeholder}
+                        required />
+                        <Form.Control.Feedback type="invalid">
+                            Please provide a valid {name}.
+                        </Form.Control.Feedback>
+                </Form.Group>
+                );
+    }
+}
