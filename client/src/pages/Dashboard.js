@@ -1,7 +1,18 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
+import { UserList } from "./UserList";
+import { Row, Col } from "react-bootstrap";
 
 export class Dashboard extends Component {
-    render(){
-        return <div>Hello word!</div>
+    render() {
+        return (
+            <Row
+                className="justify-content-md-center"
+                style={{ marginTop: "10%" }}
+            >
+                <Col md="6" className="shadow-sm p-3 mb-5 bg-light rounded">
+                    <UserList />
+                </Col>
+            </Row>
+        );
     }
 }
