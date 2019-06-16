@@ -9,7 +9,11 @@ export class Dashboard extends Component {
                 className="justify-content-md-center"
                 style={{ marginTop: "10%" }}
             >
-                <Col md="6" className="shadow-sm p-3 mb-5 bg-light rounded">
+                <Col
+                    sm="12"
+                    md="12"
+                    className="shadow-sm p-3 mb-5 bg-light rounded"
+                >
                     <UserList />
                 </Col>
             </Row>

@@ -1,10 +1,17 @@
 import React, { Component } from "react";
 import { Row, Col } from "react-bootstrap";
-import BuilTable from "../components/BuildTable";
+import { BuilTable } from "../components/BuildTable";
 
 export class UserList extends Component {
     state = {
-        users: []
+        users: [],
+        headers: [
+            { title: "First Name", colspan: 0 },
+            { title: "Last Name", colspan: 0 },
+            { title: "Email", colspan: 0 },
+            { title: "Country", colspan: 0 },
+            { title: "Actions", colspan: 2 }
+        ]
     };
 
     componentDidMount() {
@@ -23,13 +30,11 @@ export class UserList extends Component {
                         users
                     });
                 }
-
-                console.log(this.state);
             });
     }
 
     render() {
-        const { users } = this.state;
+        const { users, headers } = this.state;
         return (
             <div>
                 <Row style={{ textAlign: "center" }}>
@@ -38,7 +43,11 @@ export class UserList extends Component {
                     </Col>
                 </Row>
                 <Row>
-                    {users.length > 0 ? <BuilTable users={users} /> : <div />}
+                    {users.length > 0 ? (
+                        <BuilTable users={users} headers={headers} />
+                    ) : (
+                        <div />
+                    )}
                 </Row>
             </div>
         );

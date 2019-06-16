@@ -76,3 +76,5 @@ typings/
 .fusebox/
 
 .prettierrc
+client/.eslintrc
+.eslintrc
