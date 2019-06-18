@@ -5,17 +5,12 @@ import { Login } from "./pages/Login";
 import { Dashboard } from "./pages/Dashboard";
 import { Register } from "./pages/Register";
 import { PrivateRoute } from "./components/PrivateRoute";
-import { Container } from "react-bootstrap";
-import { isAuthenticated } from "./components/Authentication";
+import { userService } from "./service/UserService";
 
 export default class App extends Component {
-    state = {
-        isAuthenticated: isAuthenticated()
-    };
-
     componentWillMount() {
         window.addEventListener("storage", e => {
-            if (!isAuthenticated()) {
+            if (!userService.isAuthenticated()) {
                 this.setState({
                     isAuthenticated: false
                 });
@@ -25,13 +20,11 @@ export default class App extends Component {
 
     render() {
         return (
-            <Container>
-                <Switch>
-                    <Route exact path="/" component={Login} />
-                    <Route exact path="/register" component={Register} />
-                    <PrivateRoute path="/dashboard" component={Dashboard} />
-                </Switch>
-            </Container>
+            <Switch>
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/register" component={Register} />
+                <PrivateRoute path="/" component={Dashboard} />
+            </Switch>
         );
     }
 }
