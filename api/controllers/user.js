@@ -140,8 +140,41 @@ function findAll(req, res) {
     });
 }
 
+function update(req, res) {
+    var user = req.body;
+    var userId = req.params.id;
+    console.log(user);
+
+    if (userId) {
+        User.findOneAndUpdate(
+            { _id: userId },
+            user,
+            { new: true },
+            (error, userUpdated) => {
+                if (error) {
+                    res.status(500).send({
+                        message: "Error in the request",
+                        log: error.message
+                    });
+                } else {
+                    if (!userUpdated) {
+                        res.status(400).send({
+                            message: "User no found"
+                        });
+                    } else {
+                        res.status(200).send({
+                            userUpdated
+                        });
+                    }
+                }
+            }
+        );
+    }
+}
+
 module.exports = {
     create,
     login,
-    findAll
+    findAll,
+    update
 };

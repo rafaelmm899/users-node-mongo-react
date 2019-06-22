@@ -9,5 +9,6 @@ var api = express.Router();
 api.post("/user-create", userController.create);
 api.post("/login", userController.login);
 api.post("/users", userController.findAll);
+api.put("/user-update/:id", userController.update);
 
 module.exports = api;
