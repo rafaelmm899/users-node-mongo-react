@@ -143,7 +143,6 @@ function findAll(req, res) {
 function update(req, res) {
     var user = req.body;
     var userId = req.params.id;
-    console.log(user);
 
     if (userId) {
         User.findOneAndUpdate(
@@ -159,7 +158,7 @@ function update(req, res) {
                 } else {
                     if (!userUpdated) {
                         res.status(400).send({
-                            message: "User no found"
+                            message: "User not found"
                         });
                     } else {
                         res.status(200).send({
@@ -172,9 +171,33 @@ function update(req, res) {
     }
 }
 
+function remove(req, res) {
+    var idUser = req.params.id;
+    User.findById({ _id: idUser }, (error, user) => {
+        if (error) {
+            res.status(500).send({
+                message: "Error in the request"
+            });
+        } else {
+            user.remove((err, userDeleted) => {
+                if (!userDeleted) {
+                    res.status(404).send({
+                        message: "User not found"
+                    });
+                } else {
+                    res.status(200).send({
+                        user: userDeleted
+                    });
+                }
+            });
+        }
+    });
+}
+
 module.exports = {
     create,
     login,
     findAll,
-    update
+    update,
+    remove
 };
