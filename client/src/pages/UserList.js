@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import { Row, Col } from "react-bootstrap";
-import { BuilTable } from "../components/BuildTable";
+import UserTable from "../components/UserTable";
 
 export class UserList extends Component {
     state = {
         users: [],
         headers: [
-            { title: "First Name", colspan: 0 },
-            { title: "Last Name", colspan: 0 },
-            { title: "Email", colspan: 0 },
-            { title: "Country", colspan: 0 },
+            { title: "name", colspan: 0 },
+            { title: "lastname", colspan: 0 },
+            { title: "email", colspan: 0 },
+            { title: "country", colspan: 0 },
             { title: "Actions", colspan: 2 }
         ]
     };
@@ -26,6 +26,7 @@ export class UserList extends Component {
             .then(response => {
                 let { users } = response;
                 if (users) {
+                    console.log(users);
                     this.setState({
                         users
                     });
@@ -44,7 +45,7 @@ export class UserList extends Component {
                 </Row>
                 <Row>
                     {users.length > 0 ? (
-                        <BuilTable users={users} headers={headers} />
+                        <UserTable users={users} headers={headers} />
                     ) : (
                         <div />
                     )}

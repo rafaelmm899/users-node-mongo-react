@@ -33,6 +33,14 @@ export class Login extends Component {
                 this.setState({
                     isAuthenticated: true
                 });
+            } else {
+                this.setState({
+                    alert: {
+                        type: "danger",
+                        message: response.message
+                    },
+                    isAuthenticated: false
+                });
             }
         });
     };
@@ -55,17 +63,20 @@ export class Login extends Component {
                                 <h2>Login</h2>
                             </Col>
                         </Row>
-                        <Form.Row>
-                            <Form.Group as={Col} controlId="formGridEmail">
-                                <Form.Label>Email</Form.Label>
+                        <Form.Group as={Row} controlId="formGridEmail">
+                            <Form.Label column sm="12">
+                                Email
+                            </Form.Label>
+                            <Col sm="12">
                                 <Form.Control
                                     name="email"
                                     type="email"
                                     placeholder="Enter email"
                                     onChange={this.handleInputOnChange}
                                 />
-                            </Form.Group>
-                        </Form.Row>
+                            </Col>
+                        </Form.Group>
+
                         <Form.Row>
                             <Form.Group as={Col} controlId="formGridPassword">
                                 <Form.Label>Password</Form.Label>

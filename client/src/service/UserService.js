@@ -13,12 +13,12 @@ function login(email, password) {
         body: JSON.stringify({ email, password })
     })
         .then(res => res.json())
-        .then(respose => {
-            if (respose.user) {
-                localStorage.setItem("user", respose.user);
-                localStorage.setItem("token", respose.token);
-                return respose;
+        .then(response => {
+            if (response.user) {
+                localStorage.setItem("user", JSON.stringify(response.user));
+                localStorage.setItem("token", response.token);
             }
+            return response;
         });
 }
 

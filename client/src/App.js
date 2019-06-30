@@ -23,6 +23,7 @@ export default class App extends Component {
             <Switch>
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
+                <PrivateRoute exact path="/edit" component={Register} />
                 <PrivateRoute path="/" component={Dashboard} />
             </Switch>
         );
