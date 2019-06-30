@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col } from "react-bootstrap";
 import UserTable from "../components/UserTable";
+import { Message } from "../components/Message";
 
 export class UserList extends Component {
     state = {
@@ -11,7 +12,11 @@ export class UserList extends Component {
             { title: "email", colspan: 0 },
             { title: "country", colspan: 0 },
             { title: "Actions", colspan: 2 }
-        ]
+        ],
+        alert: {
+            type: null,
+            message: null
+        }
     };
 
     componentDidMount() {
@@ -34,10 +39,25 @@ export class UserList extends Component {
             });
     }
 
+    handlerMessages = (type, message) => {
+        this.setState({
+            alert: {
+                type,
+                message
+            }
+        });
+        console.log(this.state);
+    };
+
     render() {
         const { users, headers } = this.state;
         return (
             <div>
+                <Row>
+                    <Col md={{ span: 12 }}>
+                        <Message props={this.state.alert} />
+                    </Col>
+                </Row>
                 <Row style={{ textAlign: "center" }}>
                     <Col md={{ span: 12 }}>
                         <h2>Users</h2>
@@ -45,7 +65,11 @@ export class UserList extends Component {
                 </Row>
                 <Row>
                     {users.length > 0 ? (
-                        <UserTable users={users} headers={headers} />
+                        <UserTable
+                            users={users}
+                            headers={headers}
+                            handlerMessages={this.handlerMessages}
+                        />
                     ) : (
                         <div />
                     )}

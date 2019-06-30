@@ -48,6 +48,7 @@ class UserTable extends Component {
                     this.setState({
                         users
                     });
+                    this.props.handlerMessages("success", "User Updated");
                 }
             });
     }
