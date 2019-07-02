@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Table, Button, Form } from "react-bootstrap";
+import { Table, Button, Form, Modal } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
 
 class UserTable extends Component {
@@ -8,13 +8,16 @@ class UserTable extends Component {
 
         this.state = {
             users: this.props.users,
-            usersEdit: this.props.users
+            usersEdit: this.props.users,
+            smShow: false,
+            userDelete: null
         };
     }
 
     static defaultProps = {
         users: [],
-        usersEdit: []
+        usersEdit: [],
+        userDelete: null
     };
 
     renderHeader(fields) {
@@ -49,6 +52,29 @@ class UserTable extends Component {
                         users
                     });
                     this.props.handlerMessages("success", "User Updated");
+                }
+            });
+    }
+
+    deleteUser() {
+        var { user, index } = this.state.userDelete;
+        fetch(`http://localhost:3789/api/user-delete/${user._id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then(res => res.json())
+            .catch(error => console.log("error", error))
+            .then(response => {
+                if (response.user) {
+                    let { users } = this.state;
+                    users.splice(index, 1);
+                    this.setState({
+                        users,
+                        smShow: false
+                    });
+                    this.props.handlerMessages("success", "User Deleted");
                 }
             });
     }
@@ -89,7 +115,20 @@ class UserTable extends Component {
                             Cancel
                         </Button>
                     ) : (
-                        <Button variant="danger">Delete</Button>
+                        <Button
+                            variant="danger"
+                            onClick={() =>
+                                this.setState({
+                                    smShow: true,
+                                    userDelete: {
+                                        user,
+                                        index
+                                    }
+                                })
+                            }
+                        >
+                            Delete
+                        </Button>
                     )}
                 </td>
             </tr>
@@ -150,15 +189,47 @@ class UserTable extends Component {
 
     render() {
         const { users } = this.state;
+        let smClose = () => this.setState({ smShow: false, userDelete: null });
         return (
-            <Table responsive>
-                <thead>{this.renderHeader(this.props.headers)}</thead>
-                <tbody>
-                    {users.map((user, index) => {
-                        return this.renderRow(user, index);
-                    })}
-                </tbody>
-            </Table>
+            <div>
+                <Modal
+                    size="sm"
+                    show={this.state.smShow}
+                    onHide={smClose}
+                    aria-labelledby="example-modal-sizes-title-sm"
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title id="example-modal-sizes-title-sm">
+                            Small Modal
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p>Are you sure you want to delete this user?</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button
+                            variant="secondary"
+                            onClick={e => this.deleteUser()}
+                        >
+                            Yes
+                        </Button>
+                        <Button
+                            variant="primary"
+                            onClick={() => this.setState({ smShow: false })}
+                        >
+                            No
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+                <Table responsive>
+                    <thead>{this.renderHeader(this.props.headers)}</thead>
+                    <tbody>
+                        {users.map((user, index) => {
+                            return this.renderRow(user, index);
+                        })}
+                    </tbody>
+                </Table>
+            </div>
         );
     }
 }

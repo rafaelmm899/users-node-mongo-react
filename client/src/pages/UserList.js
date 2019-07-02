@@ -31,7 +31,6 @@ export class UserList extends Component {
             .then(response => {
                 let { users } = response;
                 if (users) {
-                    console.log(users);
                     this.setState({
                         users
                     });
@@ -51,6 +50,7 @@ export class UserList extends Component {
 
     render() {
         const { users, headers } = this.state;
+
         return (
             <div>
                 <Row>
@@ -69,6 +69,7 @@ export class UserList extends Component {
                             users={users}
                             headers={headers}
                             handlerMessages={this.handlerMessages}
+                            modalConfirm={this.showModalConfirm}
                         />
                     ) : (
                         <div />
