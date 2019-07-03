@@ -134,7 +134,7 @@ export class Register extends Component {
             params.fields[field] = controls;
         }
 
-        if (!params.formValidated && password !== passwordConfirm) {
+        if (!params.formValidated && password.value !== passwordConfirm.value) {
             params.formValidated = true;
             params.fields.password.isValid = false;
             params.fields.passwordConfirm.isValid = false;
