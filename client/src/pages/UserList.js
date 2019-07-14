@@ -10,6 +10,8 @@ export class UserList extends Component {
             { title: "name", colspan: 0 },
             { title: "lastname", colspan: 0 },
             { title: "email", colspan: 0 },
+            { title: "dedication", colspan: 0 },
+            { title: "city", colspan: 0 },
             { title: "country", colspan: 0 },
             { title: "Actions", colspan: 2 }
         ],
@@ -63,7 +65,7 @@ export class UserList extends Component {
                         <h2>Users</h2>
                     </Col>
                 </Row>
-                <Row>
+                <Row className="justify-content-md-center">
                     {users.length > 0 ? (
                         <UserTable
                             users={users}

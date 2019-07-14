@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { Row, Col, Form, Button, ButtonToolbar } from "react-bootstrap";
+import {
+    Row,
+    Col,
+    Form,
+    Button,
+    ButtonToolbar,
+    Container
+} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import validate from "../components/Form/Validator";
 import { InputText } from "../components/Form/InputText";
@@ -192,150 +199,181 @@ export class Register extends Component {
 
     render() {
         return (
-            <Row
-                className="justify-content-md-center"
-                style={{ marginTop: "10%" }}
-            >
-                <Col md="6" className="shadow-sm p-3 mb-5 bg-light rounded">
-                    <h1>User register</h1>
-                    <Form
-                        validated={this.state.formValidation}
-                        onSubmit={this.handleSubmit}
-                    >
-                        <Message props={this.state.alert} />
-                        <Form.Row>
-                            <InputText
-                                controlId={this.state.fields.name.controlId}
-                                label={this.state.fields.name.label}
-                                name="name"
-                                onChange={this.handleChange}
-                                placeholder="Jose"
-                                type="text"
-                                isTouched={this.state.fields.name.isTouched}
-                                isValid={this.state.fields.name.isValid}
-                            />
+            <Container>
+                <Row
+                    className="justify-content-md-center"
+                    style={{ marginTop: "10%" }}
+                >
+                    <Col md="6" className="shadow-sm p-3 mb-5 bg-light rounded">
+                        <h1>User register</h1>
+                        <Form
+                            validated={this.state.formValidation}
+                            onSubmit={this.handleSubmit}
+                        >
+                            <Message props={this.state.alert} />
+                            <Form.Row>
+                                <InputText
+                                    controlId={this.state.fields.name.controlId}
+                                    label={this.state.fields.name.label}
+                                    name="name"
+                                    onChange={this.handleChange}
+                                    placeholder="Jose"
+                                    type="text"
+                                    isTouched={this.state.fields.name.isTouched}
+                                    isValid={this.state.fields.name.isValid}
+                                />
 
-                            <InputText
-                                controlId={this.state.fields.lastname.controlId}
-                                label={this.state.fields.lastname.label}
-                                name="lastname"
-                                onChange={this.handleChange}
-                                placeholder="Mata"
-                                type="text"
-                                isTouched={this.state.fields.lastname.isTouched}
-                                isValid={this.state.fields.lastname.isValid}
-                            />
-                        </Form.Row>
-                        <Form.Row>
-                            <InputText
-                                controlId={this.state.fields.email.controlId}
-                                label={this.state.fields.email.label}
-                                name="email"
-                                onChange={this.handleChange}
-                                placeholder="name@domain.prx"
-                                type="email"
-                                isTouched={this.state.fields.email.isTouched}
-                                isValid={this.state.fields.email.isValid}
-                            />
+                                <InputText
+                                    controlId={
+                                        this.state.fields.lastname.controlId
+                                    }
+                                    label={this.state.fields.lastname.label}
+                                    name="lastname"
+                                    onChange={this.handleChange}
+                                    placeholder="Mata"
+                                    type="text"
+                                    isTouched={
+                                        this.state.fields.lastname.isTouched
+                                    }
+                                    isValid={this.state.fields.lastname.isValid}
+                                />
+                            </Form.Row>
+                            <Form.Row>
+                                <InputText
+                                    controlId={
+                                        this.state.fields.email.controlId
+                                    }
+                                    label={this.state.fields.email.label}
+                                    name="email"
+                                    onChange={this.handleChange}
+                                    placeholder="name@domain.prx"
+                                    type="email"
+                                    isTouched={
+                                        this.state.fields.email.isTouched
+                                    }
+                                    isValid={this.state.fields.email.isValid}
+                                />
 
-                            <InputText
-                                controlId={
-                                    this.state.fields.dedication.controlId
-                                }
-                                label={this.state.fields.dedication.label}
-                                name="dedication"
-                                onChange={this.handleChange}
-                                placeholder="teacher"
-                                type="text"
-                                isTouched={
-                                    this.state.fields.dedication.isTouched
-                                }
-                                isValid={this.state.fields.dedication.isValid}
-                            />
-                        </Form.Row>
-                        <Form.Row>
-                            <InputText
-                                controlId={this.state.fields.city.controlId}
-                                label={this.state.fields.city.label}
-                                name="city"
-                                onChange={this.handleChange}
-                                placeholder="Caracas"
-                                type="text"
-                                isTouched={this.state.fields.city.isTouched}
-                                isValid={this.state.fields.city.isValid}
-                            />
+                                <InputText
+                                    controlId={
+                                        this.state.fields.dedication.controlId
+                                    }
+                                    label={this.state.fields.dedication.label}
+                                    name="dedication"
+                                    onChange={this.handleChange}
+                                    placeholder="teacher"
+                                    type="text"
+                                    isTouched={
+                                        this.state.fields.dedication.isTouched
+                                    }
+                                    isValid={
+                                        this.state.fields.dedication.isValid
+                                    }
+                                />
+                            </Form.Row>
+                            <Form.Row>
+                                <InputText
+                                    controlId={this.state.fields.city.controlId}
+                                    label={this.state.fields.city.label}
+                                    name="city"
+                                    onChange={this.handleChange}
+                                    placeholder="Caracas"
+                                    type="text"
+                                    isTouched={this.state.fields.city.isTouched}
+                                    isValid={this.state.fields.city.isValid}
+                                />
 
-                            <InputText
-                                controlId={this.state.fields.country.controlId}
-                                label={this.state.fields.country.label}
-                                name="country"
-                                onChange={this.handleChange}
-                                placeholder="Venezuela"
-                                type="text"
-                                isTouched={this.state.fields.country.isTouched}
-                                isValid={this.state.fields.country.isValid}
-                            />
+                                <InputText
+                                    controlId={
+                                        this.state.fields.country.controlId
+                                    }
+                                    label={this.state.fields.country.label}
+                                    name="country"
+                                    onChange={this.handleChange}
+                                    placeholder="Venezuela"
+                                    type="text"
+                                    isTouched={
+                                        this.state.fields.country.isTouched
+                                    }
+                                    isValid={this.state.fields.country.isValid}
+                                />
 
-                            <InputText
-                                controlId={
-                                    this.state.fields.birthdate.controlId
-                                }
-                                label={this.state.fields.birthdate.label}
-                                name="birthdate"
-                                onChange={this.handleChange}
-                                placeholder="1989-07-25"
-                                type="text"
-                                isTouched={
-                                    this.state.fields.birthdate.isTouched
-                                }
-                                isValid={this.state.fields.birthdate.isValid}
-                            />
-                        </Form.Row>
-                        <Form.Row>
-                            <InputText
-                                controlId={this.state.fields.password.controlId}
-                                label={this.state.fields.password.label}
-                                name="password"
-                                onChange={this.handleChange}
-                                placeholder="Password"
-                                type="password"
-                                isTouched={this.state.fields.password.isTouched}
-                                isValid={this.state.fields.password.isValid}
-                            />
+                                <InputText
+                                    controlId={
+                                        this.state.fields.birthdate.controlId
+                                    }
+                                    label={this.state.fields.birthdate.label}
+                                    name="birthdate"
+                                    onChange={this.handleChange}
+                                    placeholder="1989-07-25"
+                                    type="text"
+                                    isTouched={
+                                        this.state.fields.birthdate.isTouched
+                                    }
+                                    isValid={
+                                        this.state.fields.birthdate.isValid
+                                    }
+                                />
+                            </Form.Row>
+                            <Form.Row>
+                                <InputText
+                                    controlId={
+                                        this.state.fields.password.controlId
+                                    }
+                                    label={this.state.fields.password.label}
+                                    name="password"
+                                    onChange={this.handleChange}
+                                    placeholder="Password"
+                                    type="password"
+                                    isTouched={
+                                        this.state.fields.password.isTouched
+                                    }
+                                    isValid={this.state.fields.password.isValid}
+                                />
 
-                            <InputText
-                                controlId={
-                                    this.state.fields.passwordConfirm.controlId
-                                }
-                                label={this.state.fields.passwordConfirm.label}
-                                name="passwordConfirm"
-                                onChange={this.handleChange}
-                                placeholder="Confirm Password"
-                                type="password"
-                                isTouched={
-                                    this.state.fields.passwordConfirm.isTouched
-                                }
-                                isValid={
-                                    this.state.fields.passwordConfirm.isValid
-                                }
-                            />
-                        </Form.Row>
-                        <ButtonToolbar style={{ justifyContent: "center" }}>
-                            <Button type="submit" variant="primary" size="lg">
-                                Save
-                            </Button>
-                            <Link
-                                to="/login"
-                                className="btn btn-secondary btn-lg"
-                                size="lg"
-                                style={{ marginLeft: ".5em" }}
-                            >
-                                Cancel
-                            </Link>
-                        </ButtonToolbar>
-                    </Form>
-                </Col>
-            </Row>
+                                <InputText
+                                    controlId={
+                                        this.state.fields.passwordConfirm
+                                            .controlId
+                                    }
+                                    label={
+                                        this.state.fields.passwordConfirm.label
+                                    }
+                                    name="passwordConfirm"
+                                    onChange={this.handleChange}
+                                    placeholder="Confirm Password"
+                                    type="password"
+                                    isTouched={
+                                        this.state.fields.passwordConfirm
+                                            .isTouched
+                                    }
+                                    isValid={
+                                        this.state.fields.passwordConfirm
+                                            .isValid
+                                    }
+                                />
+                            </Form.Row>
+                            <ButtonToolbar style={{ justifyContent: "center" }}>
+                                <Button
+                                    type="submit"
+                                    variant="primary"
+                                    size="lg"
+                                >
+                                    Save
+                                </Button>
+                                <Link
+                                    to="/login"
+                                    className="btn btn-secondary btn-lg"
+                                    size="lg"
+                                    style={{ marginLeft: ".5em" }}
+                                >
+                                    Cancel
+                                </Link>
+                            </ButtonToolbar>
+                        </Form>
+                    </Col>
+                </Row>
+            </Container>
         );
     }
 }
